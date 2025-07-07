@@ -62,11 +62,12 @@ nav { display: flex; align-items: center; justify-content: space-between; }
 /*-----------------------------
   Review Section Styles
   ----------------*/
+  .review_area-inner .section_bottom { max-width: 1500px; margin: 0 auto; width: 100%; }
 .review_inner-top h3 { font-size: clamp(24px, 3vw, 36px); font-family: "bluetees_v2black_italic_solid" !important; }
 .review_inner-top h3 br:not(.white_area.review_area-container .review_inner-top h3 br) { display: none; }
 .review_inner-top p { max-width: clamp(390px, 40vw, 600px); text-align: center; }
 .review_inner-top { display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; }
-.review_items { display: flex; align-items: center; justify-content: center; gap: 20px; max-width: 1500px; margin: 0 auto; }
+.review_items { display: flex; align-items: center; justify-content: center; gap: 20px; }
 .review_col { display: flex; flex-direction: column; row-gap: 20px; flex: 1; }
 .review_col:nth-child(2) { margin-top: 460px; }
 .highlight { color: var(--green); }
