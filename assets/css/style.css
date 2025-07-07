@@ -44,3 +44,48 @@ nav { display: flex; align-items: center; justify-content: space-between; }
 .toggle-icon::after { content: ""; position: absolute; top: 0px; left: 0px; height: 2.5px; width: 100%; background: var(--black); transition: 0.3s linear; border-radius: 10px; }
 .toggle-icon::before { transform: translateX(0px); top: 20px; width: 60%; margin-right: auto; left: inherit; right: 0; }
 .toggle-icon::after { top: 10px; width: 100%; }
+/*-----------------------------
+  Global Section Styles
+  ----------------*/
+  .section_image { background:url(../images/white-paper-texture.png) center center / cover; }
+.section { padding: 100px 50px; display: flex; flex-direction: column; row-gap: 100px; }
+.section_top { display: flex; flex-direction: column; row-gap: 50px; align-items: flex-start; justify-content: flex-start; }
+/*-----------------------------
+    Service Section Style
+    --------------*/
+    .service_area { background-color: var(--black); }
+.service_top :is(h2,h3) { color: var(--white); }
+.services_row { display: flex; align-items: center; justify-content: flex-start; }
+.service_item { border: 1px solid var(--white); padding: 40px; color: var(--white); }
+.service_item-top { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; }
+.service_item-inner { display: flex; flex-direction: column; row-gap: 193px; }
+/*-----------------------------
+  Review Section Styles
+  ----------------*/
+.review_inner-top h3 { font-size: clamp(24px, 3vw, 36px); font-family: "bluetees_v2black_italic_solid" !important; }
+.review_inner-top h3 br:not(.white_area.review_area-container .review_inner-top h3 br) { display: none; }
+.review_inner-top p { max-width: clamp(390px, 40vw, 600px); text-align: center; }
+.review_inner-top { display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; }
+.review_items { display: flex; align-items: center; justify-content: center; gap: 20px; max-width: 1500px; margin: 0 auto; }
+.review_col { display: flex; flex-direction: column; row-gap: 20px; flex: 1; }
+.review_col:nth-child(2) { margin-top: 460px; }
+.highlight { color: var(--green); }
+.review_item { color: #fff; background:#000; transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) background; max-width: 730px; width: 100%; }
+.review_item:hover { background:var(--green); }
+.review_item:hover .review_title { color:var(--white); }
+.review_item-inner { display: flex; flex-direction: column; row-gap: 185px; padding: clamp(24px, 3vw, 50px); position: relative; z-index: 2; background:url(../images/white-paper-texture.png) center center / cover; }
+.review_item-bottom { display: flex; justify-content: flex-end; }
+.review_item .review_title { color: var(--green); font-size: 100px; }
+.review_item p { --font-size: clamp(12px, 1.2vw, 34px); font-size: var(--font-size); opacity: 1; color: var(--white); }
+.slider2 .tracker-container { background: #404040; margin: 0; }
+.slider2 .tracker-container .tracker-thumb { background: #f1f1f1; }
+.slider-container.slider2 { overflow: hidden; }
+@media only screen and (max-width: 768px) {
+ .review_inner-top h3 { text-align: center; line-height: 110%; }
+.review_inner-top h3 br { display: block; }
+.review_items { display: none; align-items: center; justify-content: center; gap: 20px; }
+ }
+@media only screen and (max-width: 575px) {
+ .review_inner-top h3 { max-width: 300px; }
+.review_inner-top p { max-width: 250px; }
+ }
