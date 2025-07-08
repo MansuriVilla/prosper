@@ -90,3 +90,35 @@ nav { display: flex; align-items: center; justify-content: space-between; }
  .review_inner-top h3 { max-width: 300px; }
 .review_inner-top p { max-width: 250px; }
  }
+/* common Tagline CSS */
+.common-tagline { font-size: clamp(28px, 4vw, 42px); font-weight: 500; margin-bottom: clamp(25px, 3vw, 50px); }
+/* Sustainability CSS */
+.sustainability-section { background-color: var(--black); padding-top: clamp(50px, 5vw, 100px); }
+.sustainability-main { display: flex; align-items: center; justify-content: space-between; /* gap: clamp(100px, 8vw, 158px); */ }
+.sustainability-box { flex: 1; display: flex; gap: 120px; flex-direction: column; }
+.sustainability-content h4 { margin-bottom: 25px; font-weight: 500; color: var(--white); }
+.sustainability-content p { color: var(--white); font-weight: 300; line-height: 1.6; }
+.sustainability-box.right .sustainability-content { text-align: right; }
+.sustainability-box-global { margin: 0 auto; }
+.sustainability-heading { text-align: center; margin-bottom: clamp(35px, 4vw, 70px); }
+.sustainability-heading h2 { color: var(--white); font-weight: 300; }
+.sustainability-heading h2 span { color: var(--green); }
+.sustainability-heading .common-tagline { color: var(--white); }
+/* Footer */
+.footer-heading { border-bottom: 1px solid var(--black); margin-bottom: clamp(40px, 5vw, 80px); padding-bottom: clamp(50px, 5vw, 100px); padding-top: clamp(50px, 5vw, 100px); }
+.footer-heading h2 { font-size: clamp(50px, 6vw, 100px); font-weight: 300; }
+.footer-navigation { display: flex; justify-content: space-between; margin-bottom: clamp(40px, 4vw, 80px); }
+.footer-nav-detail h5 { margin-bottom: 20px; }
+.footer-nav-detail a { font-weight: 5000; }
+.footer-nav-contact-detail { display: flex; gap: 30px; }
+.footer-nav-contact-detail li { border-right: 1px solid var(--black); padding-right: 30px; }
+.footer-nav-contact-detail li:last-child { border-right: none; padding-right: 0; }
+.footer-nav-social-media { display: flex; gap: 30px; }
+.footer-nav-social-media li { border-right: 1px solid var(--black); padding-right: 30px; }
+.footer-nav-social-media li:last-child { border-right: none; padding-right: 0; }
+.copy-right-div { background-color: var(--black); padding: 60px 0; }
+.copy-right-content { display: flex; align-items: center; justify-content: space-between; }
+.copy-right-div .copy-right-text p { color: var(--white); }
+.made-by p,
+.made-by a { color: var(--white); }
+.made-by a { text-decoration: underline; }
