@@ -72,30 +72,62 @@ function animateServiceItems() {
   });
 }
 
-// View items animation
+// // View items animation
+// function animateOnView() {
+//   const items = gsap.utils.toArray(".view_init");
+
+//   items.forEach((item) => {
+//     const animation = gsap.from(item, {
+//       // y: 20,
+//       opacity: 0,
+//       duration: 0.9,
+//       x:"-100%",
+//       rotate:"-30%",
+//       filter:"blur(20px)",
+//       ease: "cubic-bezier(.858, .01, .068, .99)",
+//     });
+
+//     // Use helper function to attach ScrollTrigger
+//     createScrollAnimation({
+//       trigger: item,
+//       animation,
+//       start: "top 50%", // Default for desktop
+//       end: "bottom 60%",
+//       scrub: true,
+//       markers: false,
+//     });
+//   });
+// }
+
 function animateOnView() {
   const items = gsap.utils.toArray(".view_init");
 
   items.forEach((item) => {
-    // Create animation for each item
+    // Determine if the item is in the left or right column
+    const isLeftColumn = item.closest('.review_col:first-child');
+
+    // Set animation properties based on column
     const animation = gsap.from(item, {
-      y: 20,
       opacity: 0,
-      duration: 0.9,
-      ease: "cubic-bezier(.858, .01, .068, .99)",
+      duration: 2,
+      filter:"blur(20px)",
+      x: isLeftColumn ? "-30%" : "30%", // Left: -30%, Right: 30%
+      rotate: isLeftColumn ? "-30deg" : "30deg", // Left: -30deg, Right: 30deg
+      ease: "linear",
     });
 
     // Use helper function to attach ScrollTrigger
     createScrollAnimation({
       trigger: item,
       animation,
-      start: "top 50%", // Default for desktop
-      end: "bottom 60%",
-      scrub: true,
-      markers: false,
+      start: "top 90%", // Default for desktop
+      end: "bottom bottom",
+      scrub: 0.8,
+      markers: true,
     });
   });
 }
+
 
 /*
 This is function is for the text animation
@@ -106,7 +138,7 @@ Line by Line Staggering the text with custom ease
 
 function textAnimation() {
   const SplittingTextConfig = {
-    selector: "h1, h2,p",
+    selector: "h1, h2, p",
     type: "words,lines",
     linesClass: "line",
     duration: 0.8,

@@ -71,6 +71,7 @@ nav { display: flex; align-items: center; justify-content: space-between; }
   ----------------*/
   .review_area-inner .section_bottom { max-width: 1500px; margin: 0 auto; width: 100%; }
 .review_inner-top h3 { font-size: clamp(24px, 3vw, 36px); font-family: "bluetees_v2black_italic_solid" !important; }
+.review_area{overflow: hidden;}
 .review_inner-top h3 br:not(.white_area.review_area-container .review_inner-top h3 br) { display: none; }
 .review_inner-top p { max-width: clamp(390px, 40vw, 600px); text-align: center; }
 .review_inner-top { display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; }
@@ -78,7 +79,7 @@ nav { display: flex; align-items: center; justify-content: space-between; }
 .review_col { display: flex; flex-direction: column; row-gap: 20px; flex: 1; }
 .review_col:nth-child(2) { margin-top: 460px; }
 .highlight { color: var(--green); }
-.review_item { color: #fff; background:#000; transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) background; max-width: 730px; width: 100%; }
+.review_item { color: #fff; background:#000; transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) background; max-width: 730px; width: 100%; z-index: 6; position: relative; }
 .review_item:hover { background:var(--green); }
 .review_item:hover .review_title { color:var(--white); }
 .review_item-inner { display: flex; flex-direction: column; row-gap: 185px; padding: clamp(24px, 3vw, 50px); position: relative; z-index: 2; background:url(../images/white-paper-texture.png) center center / cover; }
