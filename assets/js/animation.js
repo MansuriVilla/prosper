@@ -166,7 +166,7 @@ function scrollOnView() {
       end: "+=100%", // Extend duration for smooth scroll animation
       pin: true, // Pin the section
       scrub: 1, // Smoothly tie animation to scroll
-      markers: true, // Set to true for debugging
+      markers: false, // Set to true for debugging
     },
   });
 
