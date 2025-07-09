@@ -68,49 +68,22 @@ function animateServiceItems() {
     end: () => "+=" + (serviceItems.length - 1) * 500,
     scrub: true,
     pin: true,
-    markers: true, // Set to false in production
+    markers: false, // Set to false in production
   });
 }
-
-// // View items animation
-// function animateOnView() {
-//   const items = gsap.utils.toArray(".view_init");
-
-//   items.forEach((item) => {
-//     const animation = gsap.from(item, {
-//       // y: 20,
-//       opacity: 0,
-//       duration: 0.9,
-//       x:"-100%",
-//       rotate:"-30%",
-//       filter:"blur(20px)",
-//       ease: "cubic-bezier(.858, .01, .068, .99)",
-//     });
-
-//     // Use helper function to attach ScrollTrigger
-//     createScrollAnimation({
-//       trigger: item,
-//       animation,
-//       start: "top 50%", // Default for desktop
-//       end: "bottom 60%",
-//       scrub: true,
-//       markers: false,
-//     });
-//   });
-// }
 
 function animateOnView() {
   const items = gsap.utils.toArray(".view_init");
 
   items.forEach((item) => {
     // Determine if the item is in the left or right column
-    const isLeftColumn = item.closest('.review_col:first-child');
+    const isLeftColumn = item.closest(".review_col:first-child");
 
     // Set animation properties based on column
     const animation = gsap.from(item, {
       opacity: 0,
       duration: 2,
-      filter:"blur(20px)",
+      filter: "blur(20px)",
       x: isLeftColumn ? "-30%" : "30%", // Left: -30%, Right: 30%
       rotate: isLeftColumn ? "-30deg" : "30deg", // Left: -30deg, Right: 30deg
       ease: "linear",
@@ -123,11 +96,84 @@ function animateOnView() {
       start: "top 90%", // Default for desktop
       end: "bottom bottom",
       scrub: 0.8,
-      markers: true,
+      markers: false,
     });
   });
 }
 
+/*
+
+This is function is handling the sticky header
+It will add a class to the header when the user scrolls down
+It will remove the class when the user scrolls up
+
+*/
+
+function stickyScroll() {
+  let lastScrollTop = 50;
+  let header = document.querySelector(".site_header");
+  let isHeaderFixed = false;
+
+  window.addEventListener("scroll", () => {
+    let currentScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
+    let viewportHeight = window.innerHeight;
+    let scrollThreshold = viewportHeight * 0.5;
+
+    if (currentScroll > lastScrollTop) {
+      if (
+        currentScroll > scrollThreshold &&
+        !header.classList.contains("header--hidden")
+      ) {
+        header.classList.add("header--hidden");
+      }
+    } else {
+      if (header.classList.contains("header--hidden")) {
+        header.classList.remove("header--hidden");
+      }
+    }
+
+    if (currentScroll > header.offsetHeight && !isHeaderFixed) {
+      header.classList.add("header--fixed");
+      isHeaderFixed = true;
+    } else if (currentScroll <= header.offsetHeight && isHeaderFixed) {
+      header.classList.remove("header--fixed");
+      isHeaderFixed = false;
+    }
+
+    if (currentScroll < 50) {
+      header.classList.remove("header--hidden");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+}
+stickyScroll();
+
+function scrollOnView() {
+  // Select the row to animate
+  const machinesRow = document.querySelector(".our_machines-row");
+  const machinesInner = document.querySelector(".our_machines-inner");
+
+  // Set initial state
+  gsap.set(machinesRow, { xPercent: 80 }); // Shift row left so ~20% of first item is visible
+
+  // Create animation timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: machinesInner,
+      start: "15% top", // Start when top of section hits 20% from top of viewport
+      end: "+=100%", // Extend duration for smooth scroll animation
+      pin: true, // Pin the section
+      scrub: 1, // Smoothly tie animation to scroll
+      markers: true, // Set to true for debugging
+    },
+  });
+
+  // Animate row into view
+  tl.to(machinesRow, { xPercent: 0, duration: 1, ease: "power2.out" }); // Slide row fully into view
+}
+scrollOnView();
 
 /*
 This is function is for the text animation
