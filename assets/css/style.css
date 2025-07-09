@@ -24,6 +24,13 @@ ul { margin: 0; padding: 0; }
 li { margin: 0; padding: 0; list-style: none; }
 a { text-decoration: none; display: inline-block; font-size: 30px; color: var(--black); font-weight: 400; }
 img { max-width: 100%; height: auto; display: flex; }
+.line { overflow: hidden; }
+/*----------------------------
+  Anchor Hover Effect
+  ---------*/
+.anchor_hover { position: relative; --hover-clr: var(--hover-clr); }
+.anchor_hover::after { content: ""; position: absolute; width: 100%; height: 2px; background-color: var(--hover-clr, #6fbe30); border-radius: 40px; transform: scaleX(0); left: 0px; bottom: 0px; transform-origin: right; transition: transform 0.5s ease; }
+.anchor_hover:hover::after { transform-origin: left; transform: scaleX(1); }
 /*--------------------
   Lenis Css Styles
   --------------------*/
@@ -53,10 +60,10 @@ nav { display: flex; align-items: center; justify-content: space-between; }
 /*-----------------------------
     Service Section Style
     --------------*/
-    .service_area { background-color: var(--black); }
+    .service_area { background-color: var(--black); overflow: hidden; }
 .service_top :is(h2,h3) { color: var(--white); }
-.services_row { display: flex; align-items: center; justify-content: flex-start; }
-.service_item { border: 1px solid var(--white); padding: 40px; color: var(--white); }
+.services_row { display: flex; justify-content: flex-start; }
+.service_item { border: 1px solid var(--white); padding: 40px; color: var(--white); min-width: 500px; background-color: var(--black); }
 .service_item-top { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; }
 .service_item-inner { display: flex; flex-direction: column; row-gap: 193px; }
 /*-----------------------------
