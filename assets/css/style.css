@@ -25,6 +25,18 @@ li { margin: 0; padding: 0; list-style: none; }
 a { text-decoration: none; display: inline-block; font-size: 30px; color: var(--black); font-weight: 400; }
 img { max-width: 100%; height: auto; display: flex; }
 .line { overflow: hidden; }
+.custom-drag-cursor { --x: 0px; --y: 0px; transform: translate3d(var(--x), var(--y), 0); position: fixed; width: 0; height: 0; background: var(--green); border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.2s ease-out all; display: flex; justify-content: center; align-items: center; will-change: transform; overflow: hidden; }
+.custom-drag-cursor.slider-active { cursor: none; width: 70px; height: 70px; }
+.custom-drag-cursor.dragging { transform: scale(0.1); }
+/*--------------------------
+  Staggered CTA CSS
+-----------------*/
+.staggered-item { display: inline-flex; justify-content: center; align-items: center; position: relative; cursor: pointer; }
+.staggered-item > span { position: relative; display: flex; overflow: hidden; line-height: 1; }
+.default-text { white-space: nowrap; }
+.hover-text { position: absolute; top: 0; left: 0; white-space: nowrap; pointer-events: none; color:var(--white); }
+.letter { display: inline-block; }
+.hover-text .letter { transform: translateY(100%); }
 /*----------------------------
   Anchor Hover Effect
   ---------*/
@@ -75,7 +87,7 @@ nav { display: flex; align-items: center; justify-content: space-between; }
 .our_machines-title { margin-bottom:50px ; }
 .our_machines-row { display: flex; align-items: center; gap: 30px; }
 .our_machines-title, .our_machines-description { color: var(--white); }
-.section.our_machines-inner { gap: 60px; }
+.section.our_machines-inner { gap: 60px; overflow: hidden; }
 .our_machines-item-inner { display: flex; flex-direction: column; row-gap: 35px; }
 .our_machies-item-bottom { display: flex; flex-direction: column; row-gap: 11px; text-align: center; color: var(--white); }
 .our_machies-item-bottom p { font-size: 22px; }
