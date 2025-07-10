@@ -29,7 +29,7 @@ const tl = gsap.timeline();
 // Ensure ScrollTrigger is registered
 gsap.registerPlugin(ScrollTrigger);
 
-// Set initial scale and position of floadingProduct
+// Set initial scale of floadingProduct to 0
 gsap.set(floadingProduct, { scale: 0, x: 0 });
 
 // Animate preloader items in a circular pattern
@@ -58,14 +58,14 @@ preloaderIcon.forEach(function (item, index) {
   );
 });
 
-// Animate floadingProduct to scale to 0.3
+// Animate floadingProduct from scale 0 to 0.6
 tl.to(floadingProduct, {
-  scale: 0.3,
+  scale: 0.6,
   duration: 0.5,
   ease: "power2.out",
 });
 
-// Scale down all preloaderIcon items to 0
+// Scale down all preloaderIcon items to 0 after floadingProduct animation
 tl.to(preloaderIcon, {
   scale: 0,
   duration: 0.5,
@@ -73,10 +73,10 @@ tl.to(preloaderIcon, {
   stagger: 0.05, // Staggered effect for smoother transition
 });
 
-// Animate floadingProduct to scale to 0.4 and move 100px on x-axis gradually with scroll
+// Animate floadingProduct to move 100px on x-axis and scale to 0.3 gradually with scroll
 gsap.to(floadingProduct, {
   x: 100, // Move 100px along x-axis
-  scale: 0.4, // Scale to 0.4 (adjust if needed)
+  scale: 0.3,
   scrollTrigger: {
     trigger: ".hero_area", // Trigger when .hero_area enters viewport
     start: "top bottom", // Start when top of hero_area hits bottom of viewport
@@ -85,6 +85,7 @@ gsap.to(floadingProduct, {
     markers: true, // Visual debug markers (set to false in production)
   },
 });
+
 // Helper function to create ScrollTrigger animations
 function createScrollAnimation({
   trigger,
