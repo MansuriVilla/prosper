@@ -15,6 +15,76 @@ gsap.ticker.add((time) => {
 
 gsap.ticker.lagSmoothing(0);
 
+const preloaderIcon = document.querySelectorAll(".preloader-item");
+const container = document.querySelector(".preloader-container");
+const floadingProduct = document.querySelector(".in_view-after-laoding");
+const numberOfItems = preloaderIcon.length;
+const angleIncrement = (2 * Math.PI) / numberOfItems;
+const radius = 370;
+let isGalleryOpen = false;
+const centerX = container.offsetWidth / 2;
+const centerY = container.offsetHeight / 2;
+const tl = gsap.timeline();
+
+// Ensure ScrollTrigger is registered
+gsap.registerPlugin(ScrollTrigger);
+
+// Set initial scale and position of floadingProduct
+gsap.set(floadingProduct, { scale: 0, x: 0 });
+
+// Animate preloader items in a circular pattern
+preloaderIcon.forEach(function (item, index) {
+  const img = document.createElement("img");
+  img.src = `../assets/images/preloading-product-image-1.png`; // Use the same image for all items
+  item.appendChild(img);
+  const angle = index * angleIncrement;
+  const initialRotation = (angle * 180) / Math.PI - 90;
+  const x = centerX + radius * Math.cos(angle);
+  const y = centerY + radius * Math.sin(angle);
+
+  gsap.set(item, { scale: 0 });
+  tl.to(
+    item,
+    {
+      left: `${x}px`,
+      top: `${y}px`,
+      rotation: initialRotation,
+      scale: 1,
+      duration: 1,
+      ease: "power2.out",
+      delay: 1,
+    },
+    index * 0.1
+  );
+});
+
+// Animate floadingProduct to scale to 0.3
+tl.to(floadingProduct, {
+  scale: 0.3,
+  duration: 0.5,
+  ease: "power2.out",
+});
+
+// Scale down all preloaderIcon items to 0
+tl.to(preloaderIcon, {
+  scale: 0,
+  duration: 0.5,
+  ease: "power2.in",
+  stagger: 0.05, // Staggered effect for smoother transition
+});
+
+// Animate floadingProduct to scale to 0.4 and move 100px on x-axis gradually with scroll
+gsap.to(floadingProduct, {
+  x: 100, // Move 100px along x-axis
+  scale: 0.4, // Scale to 0.4 (adjust if needed)
+  scrollTrigger: {
+    trigger: ".hero_area", // Trigger when .hero_area enters viewport
+    start: "top bottom", // Start when top of hero_area hits bottom of viewport
+    end: "bottom top", // End when bottom of hero_area hits top of viewport
+    scrub: true, // Animation progresses with scroll position
+    markers: true, // Visual debug markers (set to false in production)
+  },
+});
 // Helper function to create ScrollTrigger animations
 function createScrollAnimation({
   trigger,
