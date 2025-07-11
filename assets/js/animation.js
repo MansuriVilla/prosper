@@ -35,7 +35,7 @@ gsap.set(floadingProduct, { scale: 0, x: 0 });
 // Animate preloader items in a circular pattern
 preloaderIcon.forEach(function (item, index) {
   const img = document.createElement("img");
-  img.src = `../assets/images/preloading-product-image-1.png`; // Use the same image for all items
+  img.src = `./assets/images/preloading-product-image-1.png`; // Use the same image for all items
   item.appendChild(img);
   const angle = index * angleIncrement;
   const initialRotation = (angle * 180) / Math.PI - 90;
