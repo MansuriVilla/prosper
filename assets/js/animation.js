@@ -354,6 +354,7 @@ function hoverText() {
     });
   });
 }
+
 function scrollOnView() {
   const machinesRow = document.querySelector(".our_machines-row");
   const machinesInner = document.querySelector(".our_machines-inner");
@@ -450,7 +451,6 @@ function initializeAnimations() {
     setupCustomCursor();
     textAnimation();
     animateGlobe();
-
     hoverText();
 
     ScrollTrigger.refresh();
