@@ -30,7 +30,7 @@ function preloader() {
 
   preloaderIcon.forEach(function (item, index) {
     const img = document.createElement("img");
-    img.src = `../assets/images/preloading-product-image-1.png`;
+    img.src = `assets/images/preloading-product-image-1.png`;
     item.appendChild(img);
     const angle = index * angleIncrement;
     const initialRotation = (angle * 180) / Math.PI - 90;
