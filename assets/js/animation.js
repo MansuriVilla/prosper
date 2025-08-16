@@ -15,7 +15,9 @@ gsap.ticker.lagSmoothing(0);
 function preloader() {
   const preloaderIcon = document.querySelectorAll(".preloader-item");
   const container = document.querySelector(".preloader-container");
-  const floadingProduct = document.querySelector(".in_view-after-laoding");
+  const ProductItems = document.querySelector(".preloader__items");
+  const floatingProduct = document.querySelector(".in_view-after-laoding");
+  const HeroText = document.querySelector(".__spacing-title");
   const numberOfItems = preloaderIcon.length;
   const angleIncrement = (2 * Math.PI) / numberOfItems;
   const radius = 370;
@@ -26,7 +28,7 @@ function preloader() {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.set(floadingProduct, { scale: 0, x: 0 });
+  gsap.set(floatingProduct, { scale: 0, x: 0 });
 
   preloaderIcon.forEach(function (item, index) {
     const img = document.createElement("img");
@@ -53,7 +55,7 @@ function preloader() {
     );
   });
 
-  tl.to(floadingProduct, {
+  tl.to(floatingProduct, {
     scale: 0.6,
     duration: 0.5,
     ease: "power2.out",
@@ -65,8 +67,73 @@ function preloader() {
     ease: "power2.in",
     stagger: 0.05,
   });
+
+  tl.to(ProductItems, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.in",
+    PointerEvent: "none",
+  });
+  tl.to(container, {
+    duration: 0.5,
+    ease: "power2.in",
+    PointerEvent: "none",
+  });
+  tl.to(HeroText, {
+    marginRight: "150px",
+    duration: 0.2,
+    ease: "linear",
+  });
+  tl.to(floatingProduct, {
+    y: 80,
+    x: -305,
+    duration: 0.5,
+    ease: "linear",
+    scale: 0.18,
+    filter: "drop-shadow(0 0 60px #00000040)",
+  });
+  
 }
 preloader();
+
+
+function FloatingProduct() {
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Select the element to animate
+  const floatingProductScen = document.querySelector(".in_view-after-laoding");
+
+  // Select all sections
+  const sections = document.querySelectorAll(
+    ".prosper_universal-area, .our_machines-area"
+  );
+
+  // Create a GSAP timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: sections[0], // Start with the first section
+      start: "top bottom", // Start when top of first section hits bottom of viewport
+      end: `+=${sections.length * 100}%`, // Extend end based on number of sections
+      scrub: true, // Animation follows scroll position
+      markers: false, // Set to true for debugging
+    },
+  });
+
+  // Add animations for each section to the timeline
+  sections.forEach((section, index) => {
+    tl.to(floatingProductScen, {
+      x: index === 0 ? 120 : index === 1 ? 700 : 300,
+      y: index === 0 ? 80 : index === 1 ? 129 : 120,
+      scale: index === 0 ? 0.18 : index === 1 ? 1 : 0.22,
+      duration: 0.5,
+      ease: "linear",   
+    });
+  });
+}
+
+// Call the function
+FloatingProduct();
 
 function createScrollAnimation({
   trigger,
