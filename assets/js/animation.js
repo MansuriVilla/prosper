@@ -16,6 +16,7 @@ function preloader() {
   const preloaderIcon = document.querySelectorAll(".preloader-item");
   const container = document.querySelector(".preloader-container");
   const ProductItems = document.querySelector(".preloader__items");
+
   const floatingProduct = document.querySelector(".in_view-after-laoding");
   const HeroText = document.querySelector(".__spacing-title");
   const numberOfItems = preloaderIcon.length;
@@ -72,12 +73,12 @@ function preloader() {
     opacity: 0,
     duration: 0.5,
     ease: "power2.in",
-    PointerEvent: "none",
+    PointerEvents: "none",
   });
   tl.to(container, {
     duration: 0.5,
     ease: "power2.in",
-    PointerEvent: "none",
+    PointerEvents: "none",
   });
   tl.to(HeroText, {
     marginRight: "150px",
@@ -97,6 +98,51 @@ function preloader() {
 preloader();
 
 
+// function FloatingProduct() {
+//   // Register ScrollTrigger plugin
+//   gsap.registerPlugin(ScrollTrigger);
+
+//   // Select the element to animate
+//   const floatingProductScen = document.querySelector(".in_view-after-laoding");
+
+//   // Select all sections
+//   const sections = document.querySelectorAll(
+//     ".prosper_universal-area, .our_machines-area, .service_area"
+//   );
+
+//   // Create a GSAP timeline
+//   const tl = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: sections[0], // Start with the first section
+//       start: "top bottom", // Start when top of first section hits bottom of viewport
+//       end: `+=${sections.length * 100}%`, // Extend end based on number of sections
+//       scrub: 1.2, // Animation follows scroll position
+//       markers: false, // Set to true for debugging
+//     },
+//   });
+
+
+  
+//   // Add animations for each section to the timeline
+//   sections.forEach((section, index) => {
+//     tl.to(floatingProductScen, {
+//       x: index === 0 ? 120 : index === 1 ? 700 : index === 2 ? -460 : 400,
+//       y: index === 0 ? 80 : index === 1 ? 129 : index === 2 ? 130 : 100,
+//       scale: index === 0 ? 0.5 : index === 1 ? 1 : index === 2 ? 1 : 0,
+//       duration: 0.2,
+//       filter: "none",
+//       zIndex:-1,
+//       ease: "linear",
+//     });
+//     gsap.set(floatingProductScen, { opacity: index === 2 ? 1 : 0});
+//   });
+// }
+
+// // Call the function
+// FloatingProduct();
+
+
+
 function FloatingProduct() {
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
@@ -104,18 +150,18 @@ function FloatingProduct() {
   // Select the element to animate
   const floatingProductScen = document.querySelector(".in_view-after-laoding");
 
-  // Select all sections
+  // Select all sections for animation
   const sections = document.querySelectorAll(
-    ".prosper_universal-area, .our_machines-area"
+    ".prosper_universal-area, .our_machines-area, .service_area"
   );
 
-  // Create a GSAP timeline
+  // Create a GSAP timeline for the animation
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: sections[0], // Start with the first section
       start: "top bottom", // Start when top of first section hits bottom of viewport
       end: `+=${sections.length * 100}%`, // Extend end based on number of sections
-      scrub: true, // Animation follows scroll position
+      scrub: 1.2, // Animation follows scroll position
       markers: false, // Set to true for debugging
     },
   });
@@ -123,17 +169,65 @@ function FloatingProduct() {
   // Add animations for each section to the timeline
   sections.forEach((section, index) => {
     tl.to(floatingProductScen, {
-      x: index === 0 ? 120 : index === 1 ? 700 : 300,
-      y: index === 0 ? 80 : index === 1 ? 129 : 120,
-      scale: index === 0 ? 0.18 : index === 1 ? 1 : 0.22,
-      duration: 0.5,
-      ease: "linear",   
+      x: index === 0 ? 120 : index === 1 ? 700 : index === 2 ? -460 : 400,
+      y: index === 0 ? 80 : index === 1 ? 129 : index === 2 ? 130 : 100,
+      scale: index === 0 ? 0.5 : index === 1 ? 1 : index === 2 ? 1 : 0,
+      duration: 0.2,
+      filter: "none",
+      zIndex: -1,
+      ease: "linear",
     });
+    gsap.set(floatingProductScen, { opacity: index === 2 ? 1 : 0 });
+  });
+
+  // Separate ScrollTrigger for pinning the floating product
+  ScrollTrigger.create({
+    trigger: sections[0], // Start pinning at the first section
+    start: "top top", // Pin when top of first section hits top of viewport
+    endTrigger: ".fully_automatic-section", // Stop pinning at .fully_automatic-section
+    end: "top top", // Unpin when top of .fully_automatic-section hits top of viewport
+    pin: floatingProductScen, // Pin the floating product element
+    pinSpacing: false, // No extra spacing added
+    markers: false, // Set to true for debugging
+  });
+
+  // Stop the animation at .fully_automatic-section (as before)
+  ScrollTrigger.create({
+    trigger: ".fully_automatic-section",
+    start: "top 80%", // Start when 80% of the section is in view
+    end: "bottom top", // End when bottom of section hits top of viewport
+    onEnter: () => {
+      // Pause the timeline and hold the current position
+      tl.pause();
+      gsap.set(floatingProductScen, {
+        x: "+=0", // Maintain current x position
+        y: "+=0", // Maintain current y position
+        scale: "+=0", // Maintain current scale
+        zIndex: -1,
+        filter: "none",
+        opacity: 1, // Ensure visibility
+      });
+    },
+    onEnterBack: () => {
+      // Reapply the hold when scrolling back into the section
+      tl.pause();
+      gsap.set(floatingProductScen, {
+        x: "+=0",
+        y: "+=0",
+        scale: "+=0",
+        zIndex: -1,
+        filter: "none",
+        opacity: 1,
+      });
+    },
+    markers: false, // Set to true for debugging
   });
 }
 
 // Call the function
 FloatingProduct();
+
+
 
 function createScrollAnimation({
   trigger,
